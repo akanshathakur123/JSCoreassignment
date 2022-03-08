@@ -1,0 +1,228 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>SignUp Form</title>
+    <style type="text/css">
+        .bg-color{
+            background: #1A2980;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #26D0CE, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .heading-colr{
+            color: #ffff;
+        }
+    </style>
+</head>
+
+<body class="bg-color">
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-md-6 offset-3">
+                  <h2 class="heading-colr mb-4 text-center">SignUp Form</h2>
+                <form id="example" onsubmit="submit()">
+                    <div class="form-group py-2">
+                        <input type="text" class="form-control" onblur="validateFullName()" id="full_name" placeholder="Enter Your Full Name" name="name" required>
+                        <small id="nameErrorMsg" class="form-text text-danger"></small>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="number" class="form-control" onblur="validateAgeSelector()" id="age_selector" placeholder="Enter Your Age" name="age" required>
+                        <small id="ageErrorMsg" class="form-text text-danger"></small>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" class="form-control" onblur="validatePhoneNum()" id="phone_num" placeholder="Enter Your Mobile No." name="phone" required>
+                        <small id="phoneErrorMsg" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="email" class="form-control" onblur="validateEmailInput()" id="email_input" placeholder="Enter Your Email" name="email" required>
+                        <small id="emailErrorMsg" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group ">
+                        <input type="password" class="form-control" onblur="validateSetPassword()" id="set_password" placeholder="Enter Your Password" name="pswd" required>
+                        <small id="passwrdErrorMsg" class="form-text text-danger"></small>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mr-3" onclick="submit1()" >SignUp</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--/ Simple Registration Form -->
+</body>
+<script>
+    var name = 0;
+    var age = 0;
+    var phone = 0;
+     var email = 0;
+    var password = 0;
+
+    var form = document.getElementById('example');
+
+    function validateFullName() {
+        let full_name = form.full_name.value;
+        let nameErrorMsg = document.getElementById('nameErrorMsg');
+            var x = document.getElementById("full_name");
+            x.value = x.value.toUpperCase();
+        if (full_name) {
+            if (/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/.test(full_name)) {
+                nameErrorMsg.textContent = "Valid Name";
+                nameErrorMsg.classList.remove('text-danger');
+                nameErrorMsg.classList.add('text-warning');
+                return true;
+
+            } else {
+                nameErrorMsg.textContent = "Invalid Name";
+                nameErrorMsg.classList.add('text-danger');
+                nameErrorMsg.classList.remove('text-warning');
+                return false;
+
+            }
+        } else {
+            nameErrorMsg.textContent = "Name cannot empty";
+            return false;
+
+        }
+    }
+
+    function validateAgeSelector() {
+        let age_selector = form.age_selector.value;
+        let ageErrorMsg = document.getElementById('ageErrorMsg');
+
+        if (age_selector) {
+            if (age_selector >= 16) {
+
+                ageErrorMsg.textContent = "Valid Age";
+                ageErrorMsg.classList.remove('text-danger');
+                ageErrorMsg.classList.add('text-warning');
+
+                age = 1;
+                return true;
+
+
+            } else {
+                ageErrorMsg.textContent = "You are not eligible";
+
+                ageErrorMsg.classList.add('text-danger');
+                ageErrorMsg.classList.remove('text-warning');
+
+                age = 0;
+                return false;
+
+            }
+        } else {
+            ageErrorMsg.textContent = "Age cannot empty";
+            ageErrorMsg.classList.add('text-danger');
+            ageErrorMsg.classList.remove('text-warning');
+            return false;
+
+
+            age = 0;
+        }
+    }
+
+
+    function validatePhoneNum() {
+        let phone_num = form.phone_num.value;
+        let phone_num1 = form.phone_num.value.length;
+        let phoneErrorMsg = document.getElementById('phoneErrorMsg');
+        if (phone_num1 != 10) {
+            phoneErrorMsg.textContent = "Invalid Number";
+            phoneErrorMsg.classList.add('text-danger');
+            phoneErrorMsg.classList.remove('text-warning');
+        } else if (phone_num) {
+            if (/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(phone_num)) {
+
+                phoneErrorMsg.textContent = "Valid Phone";
+                phoneErrorMsg.classList.remove('text-danger');
+                phoneErrorMsg.classList.add('text-warning');
+                return true;
+
+
+            } else {
+                phoneErrorMsg.textContent = "Invalid Number";
+                phoneErrorMsg.classList.add('text-danger');
+                phoneErrorMsg.classList.remove('text-warning');
+                return false;
+
+            }
+        } else {
+            phoneErrorMsg.textContent = "Phone cannot empty";
+            phoneErrorMsg.classList.add('text-danger');
+            phoneErrorMsg.classList.remove('text-warning');
+            return false;
+
+        }
+    }
+        function validateEmailInput() {
+        let email_input = form.email_input.value;
+        let emailErrorMsg = document.getElementById('emailErrorMsg');
+
+        if (email_input) {
+            if (/^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/.test(email_input)) {
+
+                emailErrorMsg.textContent = "Valid Email";
+                emailErrorMsg.classList.remove('text-danger');
+                emailErrorMsg.classList.add('text-warning');
+                return true;
+
+
+            } else {
+                emailErrorMsg.textContent = "Invalid Email";
+
+                emailErrorMsg.classList.add('text-danger');
+                emailErrorMsg.classList.remove('text-warning');
+                return false;
+
+            }
+        } else {
+            emailErrorMsg.textContent = "Email cannot empty";
+            return false;
+
+        }
+    }
+    function validateSetPassword() {
+        let set_password = form.set_password.value;
+        let set_passwordl = form.set_password.value.length;
+        let passwrdErrorMsg = document.getElementById('passwrdErrorMsg');
+        let pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+
+
+        if (set_password.match(pattern)) {
+            passwrdErrorMsg.textContent = "Valid Password";
+            passwrdErrorMsg.classList.remove('text-danger');
+            passwrdErrorMsg.classList.add('text-warning');
+            return true;
+        } else {
+            passwrdErrorMsg.textContent = "Invalid Password";
+            passwrdErrorMsg.classList.add('text-danger');
+            passwrdErrorMsg.classList.remove('text-warning');
+            return false;
+        }
+
+    }
+
+    function submit1() {
+        let v1 = validateFullName();
+        let v2 = validateAgeSelector();
+        let v3 = validatePhoneNum();
+        let v4 = validateEmailInput();
+        let v5 = validateSetPassword();
+
+        if (v1 && v2 && v3 && v4 && v5) {
+            Alert("submitted")
+        } else {
+            alert("Error")
+        }
+    }
+</script>
+
+</html>
